@@ -11,21 +11,5 @@ def get_driver():
     driver = webdriver.Chrome(service = service)
     return driver
 
-#recibe el login-driver, aplico username y password e ingreso
-def login(driver, username, password):
-
-    wait = WebDriverWait(driver, 10) #establezco el tiempo de espera 
-    
-    driver.get("https://www.saucedemo.com/") #ingresa a la url
-    
-    #Evalua si hay presencia del elemento
-    wait.until(
-        EC.presence_of_element_located((By.ID, "user-name"))
-    ).send_keys(username)
-
-    #En esta no evalua y ejecuta directamente, ambas validas, la de arriba mas profesional
-    driver.find_element(By.ID, "password").send_keys(password)
-    driver.find_element(By.ID , "login-button").click()
-
 def obtener_precio_primer_producto(driver):
     return driver.find_element(By.CLASS_NAME, "inventory_item_price").text    
