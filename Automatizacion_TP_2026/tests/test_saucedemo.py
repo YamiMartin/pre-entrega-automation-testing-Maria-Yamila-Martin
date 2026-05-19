@@ -1,20 +1,14 @@
-from utils.helpers import login
+from pages.login_page import LoginPage
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-#hago la prueba de ingresa a pag con usuario y contraseña, llego a inventario
-def test_login(driver):
-    login(driver, "standard_user", "secret_sauce")
-    assert "https://www.saucedemo.com/inventory.html" in driver.current_url
-
-    #Valido que el titulo diga eso "Products"
-    title = driver.find_element(By.CLASS_NAME, "title").text
-    assert title == "Products"
-
 
 def test_catalogo(driver):
-    login(driver, "standard_user", "secret_sauce") #inicio sesion
+    login_page = LoginPage(driver)
+    login_page.openPage()
+    login_page.login("standard_user", "secret_sauce")#inicio sesion
+
     title = driver.find_element(By.CLASS_NAME, "title").text
     assert title == "Products" #busco que el titulo coincida
 
@@ -40,7 +34,10 @@ def test_catalogo(driver):
     assert "$" in precio
 
 def test_agregar_productos_al_carrito(driver):
-    login(driver, "standard_user", "secret_sauce")
+    login_page = LoginPage(driver)
+    login_page.openPage()
+    login_page.login("standard_user", "secret_sauce")
+    
     wait = WebDriverWait(driver, 10)
 
     nombre_producto = driver.find_element(By.CLASS_NAME, "inventory_item_name").text

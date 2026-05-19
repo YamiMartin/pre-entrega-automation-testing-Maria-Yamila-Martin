@@ -5,7 +5,7 @@ from selenium.webdriver.common.by import By
 class LoginPage:
 
     URL= "https://www.saucedemo.com/" #variable constante interna
-    _USERNAME = By.ID, "user-name"
+    _USERNAME = (By.ID, "user-name")
     _PASSWORD = (By.ID, "password")
     _LOGIN_BUTTON = (By.ID , "login-button")
     #constructor
