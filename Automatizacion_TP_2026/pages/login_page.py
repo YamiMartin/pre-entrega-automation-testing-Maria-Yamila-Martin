@@ -8,6 +8,8 @@ class LoginPage:
     _USERNAME = (By.ID, "user-name")
     _PASSWORD = (By.ID, "password")
     _LOGIN_BUTTON = (By.ID , "login-button")
+    _ERROR_MESSAGE = (By.CSS_SELECTOR, "[data-test='error']")
+
     #constructor
     def __init__(self, driver):
         self.driver = driver
@@ -27,3 +29,7 @@ class LoginPage:
         #En esta no evalua y ejecuta directamente, ambas validas, la de arriba mas profesional
         self.driver.find_element(*self._PASSWORD).send_keys(password) #con el * desempaqueto para que le llegue la tupla a python
         self.driver.find_element(*self._LOGIN_BUTTON).click()
+
+    def obtener_error(self):
+        return self.dirver.find_element(*self._ERROR_MESSAGE).text
+    
