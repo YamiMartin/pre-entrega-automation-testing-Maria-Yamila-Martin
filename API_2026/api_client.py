@@ -8,6 +8,11 @@ HEADERS = {
 
 def get_users():
     response = requests.get(URL_BASE, headers=HEADERS)
-    print(response.json())
+    print(response.json())# si solo pongo response sale codigo de error( o .status_code), si pongo .json() sale info 
+
+    if response.status_code == 200:
+        print(response.json())
+    else:
+        print("Error")
 
 get_users()
